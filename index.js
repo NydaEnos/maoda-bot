@@ -1,4 +1,4 @@
-const config = require("./config.json");
+// const config = require("./config.json");
 const Danbooru = require('danbooru');
 const random = require('random')
 const { Client, Intents, MessageAttachment } = require('discord.js');
@@ -97,7 +97,7 @@ client.on("messageCreate", async (message) => {
             }
         })
     }
-    
+
 
     else if (command === "help") {
         message.channel.send({content: `All available commands : \n!!new : check if there is a new image from Maoda-sama \n!!help : get all commands \n!!random : return a random image from Maoda-sama \n!!last : return last image from Maoda-sama \n!!search : search for a specific image of Maoda-sama (WIP)` });
@@ -106,4 +106,4 @@ client.on("messageCreate", async (message) => {
 
 
 
-client.login(config.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);
