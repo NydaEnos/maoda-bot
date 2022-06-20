@@ -4,8 +4,6 @@
   "description": "Get image from Damao Yu",
   "main": "index.js",
   "scripts": {
-    "heroku-prebuild": "npm install --dev",
-    "build": "webpack",
     "start": "node index.js"
   },
   "author": "danydoo",
