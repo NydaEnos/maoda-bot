@@ -1,0 +1,4 @@
+!new : check if there is a new image/post from Maoda-sama
+!help : get all commands
+!last : return last image from Maoda-sama
+!count : count how many images of Maoda-sama
