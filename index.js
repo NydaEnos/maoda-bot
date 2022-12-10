@@ -4,7 +4,7 @@ const random = require('random')
 const { Client, Intents, MessageAttachment } = require('discord.js');
 const axios= require('axios')
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
-
+ 
 
 const prefix = "!!";
 const booru = new Danbooru()
@@ -103,6 +103,7 @@ client.on("messageCreate", async (message) => {
         message.channel.send({content: `All available commands : \n!!new : check if there is a new image from Maoda-sama \n!!help : get all commands \n!!random : return a random image from Maoda-sama \n!!last : return last image from Maoda-sama \n!!search : search for a specific image of Maoda-sama (WIP)` });
     }
 });
+
 
 
 
