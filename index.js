@@ -44,6 +44,7 @@ client.on("messageCreate", async (message) => {
     }
 
     else if (command === "last") {
+        
         booru.posts({ tags: 'damao_yu' }).then(async (posts) => {
             // Select last image
             const post = posts[0]
@@ -68,35 +69,64 @@ client.on("messageCreate", async (message) => {
 
         })
     }
+    
 
     else if (command === "new") {
-        booru.posts({ tags: 'damao_yu' }).then(async (posts) => {
-            // Select last image
-            const post = posts[0]
-            if (lastIdPost == post.id) {
-                await message.channel.send({content: "No new image from Maoda-sama :cry:" })
-            }
-            else {
-                const url = booru.url(post.file_url)
-                const attachment = new MessageAttachment(url.href)
-                let res = await axios.get(url.href)
-                let char_name = post.tag_string_character
-                const contentLength = res.headers['content-length']
-            
-                let fileInMb = parseFloat(contentLength) / (1024 ** 2)
-                
-                // Send content + image file if file < 8Mb
-                if (fileInMb > 8) {
-                    await message.channel.send({content: `Maoda-sama last image : \n${char_name} \n${url.href} \n(file is too big)`});
-    
+
+        if (!args.length) {
+            booru.posts({ tags: 'damao_yu' }).then(async (posts) => {
+                // Select last image
+                const post = posts[0]
+                if (lastIdPost == post.id) {
+                    await message.channel.send({content: "No new image from Maoda-sama :cry:" })
                 }
-    
                 else {
-                    await message.channel.send({content: `Maoda-sama last image : \n${char_name}`, files: [attachment] });
+                    const url = booru.url(post.file_url)
+                    const attachment = new MessageAttachment(url.href)
+                    let res = await axios.get(url.href)
+                    let char_name = post.tag_string_character
+                    const contentLength = res.headers['content-length']
+                
+                    let fileInMb = parseFloat(contentLength) / (1024 ** 2)
+                    
+                    // Send content + image file if file < 8Mb
+                    if (fileInMb > 8) {
+                        await message.channel.send({content: `Maoda-sama last image : \n${char_name} \n${url.href} \n(file is too big)`});
+        
+                    }
+        
+                    else {
+                        await message.channel.send({content: `Maoda-sama last image : \n${char_name}`, files: [attachment] });
+                    }
+                    lastIdPost = post.id
                 }
-                lastIdPost = post.id
-            }
-        })
+            })
+        }
+        else {
+            const usrInput = Integer.parseInt(args[0])
+            booru.posts({ tags: 'damao_yu' }).then(async (posts) => {
+                for (let i = 0; i < usrInput; i++) {
+                    const post = posts[i]
+                    const url = booru.url(post.file_url)
+                    const attachment = new MessageAttachment(url.href)
+                    let res = await axios.get(url.href)
+                    let char_name = post.tag_string_character
+                    const contentLength = res.headers['content-length']
+                
+                    let fileInMb = parseFloat(contentLength) / (1024 ** 2)
+                    
+                    // Send content + image file if file < 8Mb
+                    if (fileInMb > 8) {
+                        await message.channel.send({content: `Maoda-sama last image : \n${char_name} \n${url.href} \n(file is too big)`});
+        
+                    }
+        
+                    else {
+                        await message.channel.send({content: `Maoda-sama last image : \n${char_name}`, files: [attachment] });
+                    }
+                }
+            })
+        }
     }
 
 
