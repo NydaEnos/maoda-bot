@@ -105,14 +105,12 @@ client.on("messageCreate", async (message) => {
         else {
             const usrInput = parseInt(args[0])
             console.log(`User has selected ${args[0]} images.`)
-            let my_files = [];
             for (let i = 0; i < usrInput; i++) {
                 booru.posts({ tags: 'damao_yu' }).then(async (posts) => {
                     
                         const post = posts[i]
                         const url = booru.url(post.file_url)
                         const attachment = new MessageAttachment(url.href)
-
                         let res = await axios.get(url.href)
                         let char_name = post.tag_string_character
                         const contentLength = res.headers['content-length']
@@ -121,17 +119,16 @@ client.on("messageCreate", async (message) => {
                         
                         // Send content + image file if file < 8Mb
                         if (fileInMb > 8) {
-                            await message.channel.send({content: `Maoda-sama ${i} image : \n${char_name} \n${url.href} \n(file is too big)`});
+                            await message.channel.send({content: `Maoda-sama last image : \n${char_name} \n${url.href} \n(file is too big)`});
             
                         }
             
                         else {
-                            my_files.push(attachment)
+                            await message.channel.send({content: `Maoda-sama last image : \n${char_name}`, files: [attachment] });
                         }
                     
                 })
             }
-            await message.channel.send({content: `Maoda-sama latest ${args[0]} images : \n${char_name}`, files: my_files});
         }
     }
 
