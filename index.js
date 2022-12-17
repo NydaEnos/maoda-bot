@@ -108,7 +108,7 @@ client.on("messageCreate", async (message) => {
             for (let i = 0; i < usrInput; i++) {
                 booru.posts({ tags: 'damao_yu' }).then(async (posts) => {
                     
-                        const post = posts[0]
+                        const post = posts[i]
                         const url = booru.url(post.file_url)
                         const attachment = new MessageAttachment(url.href)
                         let res = await axios.get(url.href)
