@@ -10,7 +10,7 @@ const booru = new Danbooru()
 
 var lastIdPost = ""
 dotenv.config()
-
+console.log(process.env)
 client.on("messageCreate", async (message) => {
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
