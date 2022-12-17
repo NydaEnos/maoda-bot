@@ -13,6 +13,7 @@ dotenv.config()
 client.on("messageCreate", async (message) => {
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
+    console.log(args)
     const command = args.shift().toLowerCase();
     
     if (command === "random") {
@@ -102,7 +103,8 @@ client.on("messageCreate", async (message) => {
             })
         }
         else {
-            const usrInput = Integer.parseInt(args[0])
+            const usrInput = parseInt(args[0])
+            console.log(`User has selected ${args[0]} images.`)
             for (let i = 0; i < usrInput; i++) {
                 booru.posts({ tags: 'damao_yu' }).then(async (posts) => {
                     
