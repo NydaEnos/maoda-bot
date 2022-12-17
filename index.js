@@ -4,11 +4,12 @@ const random = require('random')
 const { Client, Intents, MessageAttachment } = require('discord.js');
 const axios= require('axios')
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
- 
-
+const dotenv = require("dotenv")
 const prefix = "!!";
 const booru = new Danbooru()
+
 var lastIdPost = ""
+dotenv.config()
 
 client.on("messageCreate", async (message) => {
     const commandBody = message.content.slice(prefix.length);
